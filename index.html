@@ -7,9 +7,10 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', Arial, sans-serif;
-      background-color: white;
+      background: linear-gradient(to right,
+        rgba(128, 0, 128, 0.1),
+        rgba(0, 255, 0, 0.1));
       font-size: 20px;
-      line-height: 1.6;
       color: #222;
     }
 
@@ -33,7 +34,6 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: white;
       padding: 40px 20px;
       flex-wrap: wrap;
       gap: 20px;
@@ -51,27 +51,17 @@
       box-shadow: none;
     }
 
-    /* Degradado suave aplicado en secciones blancas */
-    .texto-especial,
-    .boxeador-descripcion,
-    .gran-pelea {
-      background: linear-gradient(to right, 
-        rgba(128, 0, 128, 0.15),  /* morado leve */
-        rgba(144, 238, 144, 0.15) /* verde leve */
-      );
+    .texto-especial {
       padding: 50px 20px;
-      border-radius: 10px;
-      margin-bottom: 20px;
+      text-align: center;
     }
 
-    /* Animación para texto que cambia color */
-.texto-especial p {
-  animation: parpadeo-color 1s infinite;
-  font-weight: bold;
-  font-size: 26px;
-  text-align: center;
-  margin: 0; /* opcional para eliminar espacio adicional */
-}
+    .texto-especial p {
+      animation: parpadeo-color 1s infinite;
+      font-weight: bold;
+      font-size: 26px;
+      margin: 0;
+    }
 
     @keyframes parpadeo-color {
       0%, 100% { color: black; }
@@ -81,8 +71,8 @@
     .boxeador-descripcion {
       display: flex;
       align-items: center;
+      padding: 30px 10%;
       gap: 30px;
-      font-size: 22px;
     }
 
     .boxeador-descripcion img {
@@ -92,6 +82,8 @@
     }
 
     .boxeador-descripcion .info {
+      font-size: 20px;
+      line-height: 1.6;
       max-width: 600px;
     }
 
@@ -101,21 +93,22 @@
 
     .gran-pelea {
       text-align: center;
+      padding: 50px 20px;
     }
 
     .gran-pelea h2 {
-      font-size: 38px;
+      font-size: 36px;
       color: black;
       margin-bottom: 20px;
     }
 
     .gran-pelea a {
-      font-size: 24px;
+      font-size: 22px;
       color: white;
       background-color: red;
-      padding: 14px 34px;
+      padding: 12px 30px;
       text-decoration: none;
-      border-radius: 10px;
+      border-radius: 8px;
       transition: background-color 0.3s ease;
     }
 
@@ -127,7 +120,7 @@
       background-color: #eee;
       padding: 20px;
       text-align: center;
-      font-size: 16px;
+      font-size: 14px;
       color: #555;
     }
 
@@ -152,13 +145,11 @@
       transform: scale(1.1);
     }
 
-    /* Ventana emergente de música */
+    /* Ventana emergente */
     #ventana-musica {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       background: rgba(0,0,0,0.7);
       display: flex;
       justify-content: center;
@@ -172,8 +163,6 @@
       border-radius: 10px;
       text-align: center;
       font-size: 20px;
-      max-width: 90%;
-      box-shadow: 0 0 15px rgba(0,0,0,0.5);
     }
 
     #ventana-musica button {
@@ -183,46 +172,27 @@
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      transition: background-color 0.3s;
     }
 
-    #ventana-musica .si {
-      background-color: #218838;
-      color: white;
-    }
+    .si { background-color: #28a745; color: white; }
+    .si:hover { background-color: #218838; }
+    .no { background-color: #dc3545; color: white; }
+    .no:hover { background-color: #c82333; }
 
-    #ventana-musica .si:hover {
-      background-color: #218838;
-    }
-
-    #ventana-musica .no {
-      background-color: #dc3545;
-      color: white;
-    }
-
-    #ventana-musica .no:hover {
-      background-color: #c82333;
-    }
-
-    /* Estilos para el texto KO */
+    /* Texto KO */
     #ko-texto {
       position: fixed;
-      top: 50%;
-      left: 50%;
+      top: 50%; left: 50%;
       transform: translate(-50%, -50%) scale(1);
       font-size: 150px;
       font-weight: 900;
       color: red;
-      text-shadow:
-        2px 2px 5px black,
-        0 0 15px red;
+      text-shadow: 2px 2px 5px black, 0 0 15px red;
       opacity: 0;
       z-index: 3000;
       pointer-events: none;
-      animation-fill-mode: forwards;
     }
 
-    /* Animación de zoom rápido aparece y desaparece varias veces */
     @keyframes ko-bucle {
       0%, 20%, 40%, 60%, 80%, 100% {
         opacity: 1;
@@ -234,32 +204,24 @@
       }
     }
 
-    /* Animación de desaparición lenta */
     @keyframes ko-desaparece {
-      from {
-        opacity: 1;
-      }
-      to {
-        opacity: 0;
-      }
+      from { opacity: 1; }
+      to { opacity: 0; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Audio música -->
+  <!-- Audios -->
   <audio id="musica" loop>
     <source src="Musica.mp3" type="audio/mpeg" />
-    Tu navegador no soporta audio HTML5.
   </audio>
 
-  <!-- Audio campana -->
   <audio id="campana">
     <source src="Campana.mp3" type="audio/mpeg" />
-    Tu navegador no soporta audio HTML5.
   </audio>
 
-  <!-- Ventana para activar música -->
+  <!-- Ventana pregunta -->
   <div id="ventana-musica">
     <div class="contenido">
       <p>¿Quieres activar la música?</p>
@@ -268,22 +230,21 @@
     </div>
   </div>
 
-  <!-- Texto KO oculto inicialmente -->
+  <!-- KO -->
   <div id="ko-texto">K.O.</div>
 
-  <!-- Logo flotante con enlace -->
+  <!-- Logo flotante -->
   <div class="logo-flotante">
-    <a href="https://www.youtube.com/@EmiGamer576_YT" target="_blank">
-      <img src="Logo.png" alt="Logo YouTube" />
+    <a href="https://www.youtube.com/@LAPTZDELA%C3%91O" target="_blank">
+      <img src="Logo.png" alt="Logo" />
     </a>
   </div>
 
-  <!-- Encabezado -->
+  <!-- Contenido -->
   <div class="encabezado">
     <h1>LA PUTIZA DEL AÑO</h1>
   </div>
 
-  <!-- Boxeadores -->
   <div class="boxeadores">
     <img src="boxeador1.png" alt="ELIAN" class="box" />
     <img src="emivselian.png" alt="Emi vs Elian" class="centro" />
@@ -298,7 +259,7 @@
     <img src="Boxeador4.png" alt="Boxeador4" />
     <div class="info">
       <h3>Elian</h3>
-      <p>Altura: 1.75 m<br />Peso: 65 kg<br />Estilo: Ofensivo<br />Experiencia: 7 años</p>
+      <p>Altura: 1.75 m<br>Peso: 65 kg<br>Estilo: Ofensivo<br>Experiencia: 7 años</p>
     </div>
   </div>
 
@@ -306,7 +267,7 @@
     <img src="Boxeador3.png" alt="Boxeador5" />
     <div class="info">
       <h3>Emi</h3>
-      <p>Altura: 1.70 m<br />Peso: 60 kg<br />Estilo: Ofensivo<br />Experiencia: 6 años</p>
+      <p>Altura: 1.70 m<br>Peso: 60 kg<br>Estilo: Ofensivo<br>Experiencia: 6 años</p>
     </div>
   </div>
 
@@ -321,28 +282,31 @@
 
   <script>
     function activarMusica() {
-      const audioMusica = document.getElementById('musica');
-      const audioCampana = document.getElementById('campana');
+      const musica = document.getElementById('musica');
+      const campana = document.getElementById('campana');
       const ventana = document.getElementById('ventana-musica');
       const koTexto = document.getElementById('ko-texto');
 
-      audioMusica.play();
-      audioCampana.play();
+      musica.play().then(() => {
+        console.log("🎵 Música activada");
+      }).catch(err => {
+        console.error("❌ Error al reproducir la música:", err);
+        alert("No se pudo reproducir la música. Revisa si Musica.mp3 está bien subido.");
+      });
+
+      campana.play();
 
       ventana.style.display = 'none';
 
       koTexto.style.opacity = '1';
       koTexto.style.animation = 'none';
-      void koTexto.offsetWidth; // reinicia animación
-
+      void koTexto.offsetWidth;
       koTexto.style.animation = 'ko-bucle 0.6s ease-in-out';
 
       koTexto.addEventListener('animationend', function handler() {
         koTexto.removeEventListener('animationend', handler);
-
         setTimeout(() => {
           koTexto.style.animation = 'ko-desaparece 1.2s forwards';
-
           koTexto.addEventListener('animationend', function handler2() {
             koTexto.style.opacity = '0';
             koTexto.style.animation = 'none';
